@@ -41,6 +41,13 @@ export default function CartDrawer() {
   const qualifiesForFreeShipping = subtotal >= SHIPPING_THRESHOLD
   const empty = resolved.length === 0
 
+  const hasSubscription = resolved.some((l) => l.subscription)
+  const clubSavings = resolved.reduce(
+    (sum, l) =>
+      l.subscription ? sum + (l.basePrice - l.unitPrice) * l.qty : sum,
+    0,
+  )
+
   function applyDiscount(e: React.FormEvent) {
     e.preventDefault()
     if (!discount.trim()) return
@@ -169,9 +176,21 @@ export default function CartDrawer() {
                             {line.variant.label}
                           </div>
                         )}
+                        {line.subscription && (
+                          <div className="mt-1.5 inline-flex items-center gap-1.5 rounded-full bg-accent/30 text-accent-foreground text-[10px] uppercase tracking-widest font-semibold px-2 py-0.5">
+                            ↻ Arwah Club · weekly
+                          </div>
+                        )}
                       </div>
-                      <div className="text-sm font-medium whitespace-nowrap">
-                        ${line.lineTotal.toFixed(2)}
+                      <div className="text-right whitespace-nowrap">
+                        <div className="text-sm font-medium">
+                          ${line.lineTotal.toFixed(2)}
+                        </div>
+                        {line.subscription && (
+                          <div className="text-[11px] text-muted line-through">
+                            ${(line.basePrice * line.qty).toFixed(2)}
+                          </div>
+                        )}
                       </div>
                     </div>
 
@@ -249,6 +268,12 @@ export default function CartDrawer() {
                   <span className="text-muted">Subtotal</span>
                   <span>${subtotal.toFixed(2)}</span>
                 </div>
+                {hasSubscription && clubSavings > 0 && (
+                  <div className="flex justify-between text-primary">
+                    <span>Arwah Club savings</span>
+                    <span>−${clubSavings.toFixed(2)}</span>
+                  </div>
+                )}
                 <div className="flex justify-between">
                   <span className="text-muted">Shipping</span>
                   <span className="text-muted">
@@ -264,6 +289,16 @@ export default function CartDrawer() {
                   </span>
                 </div>
               </div>
+
+              {hasSubscription && (
+                <div className="rounded-xl bg-accent/15 border border-accent/40 px-4 py-3 text-xs text-foreground/80 leading-relaxed">
+                  <div className="font-medium text-foreground mb-0.5">
+                    ↻ This order includes an Arwah Club subscription.
+                  </div>
+                  Subscription items renew weekly with 5% off. You can skip a
+                  week or cancel anytime from your account.
+                </div>
+              )}
 
               <button
                 disabled

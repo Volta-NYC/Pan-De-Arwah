@@ -9,20 +9,30 @@ import {
   useState,
   type ReactNode,
 } from "react"
-import { getProductBySlug, type Product, type ProductVariant } from "./products"
+import {
+  applyClubDiscount,
+  getProductBySlug,
+  type Product,
+  type ProductVariant,
+} from "./products"
 
 export type CartLine = {
-  /** Composite key — product slug + variant id (or "default") */
+  /** Composite key — slug + variant + (sub|oneoff) */
   key: string
   productSlug: string
   variantId: string | null
   qty: number
+  /** True if this line is part of an Arwah Club subscription */
+  subscription: boolean
 }
 
 export type ResolvedCartLine = CartLine & {
   product: Product
   variant: ProductVariant | null
+  /** Effective per-unit price (already discounted if subscription) */
   unitPrice: number
+  /** The undiscounted reference price (for strikethrough display) */
+  basePrice: number
   lineTotal: number
   variantLabel: string
 }
@@ -36,7 +46,12 @@ type CartContextValue = {
   openCart: () => void
   closeCart: () => void
   toggleCart: () => void
-  addItem: (product: Product, variant: ProductVariant | null, qty: number) => void
+  addItem: (
+    product: Product,
+    variant: ProductVariant | null,
+    qty: number,
+    options?: { subscription?: boolean },
+  ) => void
   setQty: (key: string, qty: number) => void
   removeItem: (key: string) => void
   clear: () => void
@@ -45,8 +60,12 @@ type CartContextValue = {
 const CartContext = createContext<CartContextValue | null>(null)
 const STORAGE_KEY = "pdarwah-cart-v1"
 
-function makeKey(slug: string, variantId: string | null): string {
-  return `${slug}::${variantId ?? "default"}`
+function makeKey(
+  slug: string,
+  variantId: string | null,
+  subscription: boolean,
+): string {
+  return `${slug}::${variantId ?? "default"}::${subscription ? "sub" : "oneoff"}`
 }
 
 export function CartProvider({ children }: { children: ReactNode }) {
@@ -58,8 +77,25 @@ export function CartProvider({ children }: { children: ReactNode }) {
     try {
       const raw = localStorage.getItem(STORAGE_KEY)
       if (raw) {
-        const parsed = JSON.parse(raw) as CartLine[]
-        if (Array.isArray(parsed)) setLines(parsed)
+        const parsed = JSON.parse(raw) as Partial<CartLine>[]
+        if (Array.isArray(parsed)) {
+          // Normalize older entries (pre-subscription schema) so keys stay valid.
+          const migrated: CartLine[] = parsed
+            .filter((l): l is Partial<CartLine> => !!l && typeof l === "object")
+            .map((l) => {
+              const subscription = l.subscription === true
+              const variantId = l.variantId ?? null
+              return {
+                key: makeKey(l.productSlug ?? "", variantId, subscription),
+                productSlug: l.productSlug ?? "",
+                variantId,
+                qty: typeof l.qty === "number" && l.qty > 0 ? l.qty : 1,
+                subscription,
+              }
+            })
+            .filter((l) => l.productSlug)
+          setLines(migrated)
+        }
       }
     } catch {
       /* ignore corrupted cart */
@@ -90,8 +126,14 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const toggleCart = useCallback(() => setIsOpen((v) => !v), [])
 
   const addItem = useCallback(
-    (product: Product, variant: ProductVariant | null, qty: number) => {
-      const key = makeKey(product.slug, variant?.id ?? null)
+    (
+      product: Product,
+      variant: ProductVariant | null,
+      qty: number,
+      options?: { subscription?: boolean },
+    ) => {
+      const subscription = options?.subscription ?? false
+      const key = makeKey(product.slug, variant?.id ?? null, subscription)
       setLines((prev) => {
         const existing = prev.find((l) => l.key === key)
         if (existing) {
@@ -106,6 +148,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
             productSlug: product.slug,
             variantId: variant?.id ?? null,
             qty,
+            subscription,
           },
         ]
       })
@@ -137,12 +180,16 @@ export function CartProvider({ children }: { children: ReactNode }) {
           l.variantId && product.variants
             ? product.variants.find((v) => v.id === l.variantId) ?? null
             : null
-        const unitPrice = variant?.price ?? product.price
+        const basePrice = variant?.price ?? product.price
+        const unitPrice = l.subscription
+          ? applyClubDiscount(basePrice)
+          : basePrice
         return {
           ...l,
           product,
           variant,
           variantLabel: variant?.label ?? "Standard",
+          basePrice,
           unitPrice,
           lineTotal: unitPrice * l.qty,
         }

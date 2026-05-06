@@ -30,6 +30,23 @@ export type Product = {
 
 const IMG = "/products"
 
+/**
+ * Arwah Club — subscription perk metadata.
+ * Real recurring billing isn't wired up yet (would route through Stripe /
+ * Shopify Subscriptions); this drives the UI + pricing math only.
+ */
+export const ARWAH_CLUB = {
+  id: "arwah-club-weekly",
+  name: "Arwah Club",
+  frequencyLabel: "Deliver every week",
+  /** 5% off the per-line price */
+  discountPct: 0.05,
+} as const
+
+export function applyClubDiscount(price: number) {
+  return Math.round(price * (1 - ARWAH_CLUB.discountPct) * 100) / 100
+}
+
 export const products: Product[] = [
   {
     slug: "ajeeb-loaf",
