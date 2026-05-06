@@ -1,23 +1,19 @@
+import Hero from "@/lib/components/hero"
+import About from "@/lib/components/about"
+import Menu from "@/lib/components/menu"
+import GlutenFreeSpotlight from "@/lib/components/gluten-free-spotlight"
+import HowItWorks from "@/lib/components/how-it-works"
+import WholesaleCTA from "@/lib/components/wholesale-cta"
+
 export default function HomePage() {
   return (
-    <div className="space-y-8">
-      <h1 className="text-4xl font-bold">
-        Welcome to Business Name
-      </h1>
-
-      <p className="text-lg text-gray-600">
-        Replace this section with a strong value proposition.
-      </p>
-
-      <div className="flex gap-4">
-        <button className="px-6 py-3 bg-black text-white rounded-md">
-          Primary Action
-        </button>
-
-        <button className="px-6 py-3 border rounded-md">
-          Secondary Action
-        </button>
-      </div>
-    </div>
+    <>
+      <Hero />
+      <About />
+      <Menu />
+      <GlutenFreeSpotlight />
+      <HowItWorks />
+      <WholesaleCTA />
+    </>
   )
 }

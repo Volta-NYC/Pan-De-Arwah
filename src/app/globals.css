@@ -2,11 +2,97 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body {
-  padding: 0;
-  margin: 0;
+/*
+  THEME TOKENS
+  ------------
+  HSL triplets (no hsl(), no commas) so Tailwind can apply alpha.
+  Swap palettes by editing :root, or set <html data-theme="sage|linen|rose">.
+*/
+
+:root {
+  /* Light "warm cream" — default */
+  --bg: 36 38% 97%;
+  --surface: 34 35% 94%;
+  --elevated: 0 0% 100%;
+  --foreground: 24 25% 16%;
+  --muted: 26 14% 42%;
+  --subtle: 30 18% 80%;
+  --primary: 22 52% 42%;
+  --primary-foreground: 36 38% 98%;
+  --accent: 36 70% 58%;
+  --accent-foreground: 24 30% 14%;
+  --border: 30 22% 86%;
+  --ring: 22 52% 42%;
+
+  --radius: 14px;
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Fraunces", "Playfair Display", Georgia, serif;
+}
+
+[data-theme="sage"] {
+  --bg: 90 25% 97%;
+  --surface: 90 22% 93%;
+  --elevated: 0 0% 100%;
+  --foreground: 150 20% 14%;
+  --muted: 140 10% 38%;
+  --subtle: 130 15% 80%;
+  --primary: 145 28% 38%;
+  --primary-foreground: 90 25% 98%;
+  --accent: 80 40% 60%;
+  --accent-foreground: 150 20% 14%;
+  --border: 130 15% 85%;
+  --ring: 145 28% 38%;
+}
+
+[data-theme="linen"] {
+  --bg: 30 20% 96%;
+  --surface: 30 18% 92%;
+  --elevated: 0 0% 100%;
+  --foreground: 220 15% 18%;
+  --muted: 220 8% 42%;
+  --subtle: 220 10% 82%;
+  --primary: 215 35% 38%;
+  --primary-foreground: 30 20% 98%;
+  --accent: 200 50% 60%;
+  --accent-foreground: 220 15% 14%;
+  --border: 220 12% 86%;
+  --ring: 215 35% 38%;
+}
+
+[data-theme="rose"] {
+  --bg: 20 50% 97%;
+  --surface: 18 45% 93%;
+  --elevated: 0 0% 100%;
+  --foreground: 350 22% 18%;
+  --muted: 350 10% 42%;
+  --subtle: 350 18% 84%;
+  --primary: 350 50% 52%;
+  --primary-foreground: 20 50% 98%;
+  --accent: 25 80% 64%;
+  --accent-foreground: 350 22% 18%;
+  --border: 350 18% 88%;
+  --ring: 350 50% 52%;
 }
 
 * {
   box-sizing: border-box;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color: hsl(var(--bg));
+  color: hsl(var(--foreground));
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: hsl(var(--primary) / 0.2);
+  color: hsl(var(--foreground));
 }
