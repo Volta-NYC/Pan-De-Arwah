@@ -4,6 +4,8 @@ import Navbar from "@/lib/components/navbar"
 import Footer from "@/lib/components/footer"
 import AnnouncementBar from "@/lib/components/announcement-bar"
 import RewardsButton from "@/lib/components/rewards-button"
+import CartDrawer from "@/lib/components/cart-drawer"
+import { CartProvider } from "@/lib/cart-context"
 
 export const metadata: Metadata = {
   title: "Pan de Arwah — Artisan Sourdough Micro Bakery · Brooklyn",
@@ -42,11 +44,14 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen flex flex-col bg-bg text-foreground">
-        <AnnouncementBar />
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
-        <RewardsButton />
+        <CartProvider>
+          <AnnouncementBar />
+          <Navbar />
+          <main className="flex-1">{children}</main>
+          <Footer />
+          <RewardsButton />
+          <CartDrawer />
+        </CartProvider>
       </body>
     </html>
   )

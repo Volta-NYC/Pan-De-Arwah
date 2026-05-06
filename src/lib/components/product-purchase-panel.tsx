@@ -2,8 +2,10 @@
 
 import { useState } from "react"
 import type { Product } from "@/lib/products"
+import { useCart } from "@/lib/cart-context"
 
 export default function ProductPurchasePanel({ product }: { product: Product }) {
+  const { addItem } = useCart()
   const [variantId, setVariantId] = useState<string | undefined>(
     product.variants?.[0]?.id,
   )
@@ -14,13 +16,9 @@ export default function ProductPurchasePanel({ product }: { product: Product }) 
   const unitPrice = activeVariant?.price ?? product.price
   const total = unitPrice * qty
 
-  function placeholderAdd() {
-    setFlash(
-      `Added ${qty} × ${product.name}${
-        activeVariant ? ` (${activeVariant.label})` : ""
-      } — checkout isn't wired yet.`,
-    )
-    setTimeout(() => setFlash(null), 3500)
+  function handleAdd() {
+    addItem(product, activeVariant ?? null, qty)
+    setQty(1)
   }
 
   function placeholderBuy() {
@@ -89,7 +87,7 @@ export default function ProductPurchasePanel({ product }: { product: Product }) 
           </button>
         </div>
         <button
-          onClick={placeholderAdd}
+          onClick={handleAdd}
           className="flex-1 rounded-full bg-foreground text-bg px-6 py-3 text-sm font-medium hover:bg-primary transition-colors flex items-center justify-center gap-2"
         >
           <span aria-hidden>🛍</span> Add to cart

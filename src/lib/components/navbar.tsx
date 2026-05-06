@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { useState } from "react"
+import CartIcon from "./cart-icon"
 
 const links = [
   { href: "/#menu", label: "Menu" },
@@ -42,17 +43,21 @@ export default function Navbar() {
           >
             Order
           </a>
+          <CartIcon />
         </div>
 
-        <button
-          aria-label="Toggle menu"
-          className="md:hidden p-2 rounded-md hover:bg-surface"
-          onClick={() => setOpen((v) => !v)}
-        >
-          <span className="block w-5 h-0.5 bg-foreground mb-1.5" />
-          <span className="block w-5 h-0.5 bg-foreground mb-1.5" />
-          <span className="block w-5 h-0.5 bg-foreground" />
-        </button>
+        <div className="md:hidden flex items-center gap-1">
+          <CartIcon />
+          <button
+            aria-label="Toggle menu"
+            className="p-2 rounded-md hover:bg-surface"
+            onClick={() => setOpen((v) => !v)}
+          >
+            <span className="block w-5 h-0.5 bg-foreground mb-1.5" />
+            <span className="block w-5 h-0.5 bg-foreground mb-1.5" />
+            <span className="block w-5 h-0.5 bg-foreground" />
+          </button>
+        </div>
       </div>
 
       {open && (
