@@ -27,6 +27,8 @@
   --radius: 14px;
   --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-display: "Fraunces", "Playfair Display", Georgia, serif;
+  --wave-scroll: 0;
+  --wave-shift: 0px;
 }
 
 [data-theme="sage"] {
@@ -84,15 +86,124 @@ body {
   margin: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background-color: hsl(var(--bg));
+  background:
+    radial-gradient(circle at 12% 8%, hsl(var(--accent) / 0.12), transparent 26rem),
+    radial-gradient(circle at 84% 16%, hsl(var(--primary) / 0.08), transparent 28rem),
+    hsl(var(--bg));
   color: hsl(var(--foreground));
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 ::selection {
   background: hsl(var(--primary) / 0.2);
   color: hsl(var(--foreground));
+}
+
+.site-shell {
+  isolation: isolate;
+  position: relative;
+}
+
+.site-shell::before {
+  background-image: url("data:image/svg+xml,%3Csvg width='192' height='192' viewBox='0 0 192 192' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23835a35' stroke-opacity='0.42' stroke-width='1.15'%3E%3Cpath d='M96 12 119 73 180 96 119 119 96 180 73 119 12 96 73 73Z'/%3E%3Cpath d='M96 36 136 56 156 96 136 136 96 156 56 136 36 96 56 56Z'/%3E%3Cpath d='M36 96H156M96 36V156M56 56 136 136M136 56 56 136'/%3E%3C/g%3E%3Cg fill='none' stroke='%23c88838' stroke-opacity='0.3' stroke-width='1'%3E%3Ccircle cx='96' cy='96' r='19'/%3E%3Cpath d='M77 96H115M96 77V115'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 192px 192px;
+  content: "";
+  inset: 0;
+  opacity: 0.16;
+  pointer-events: none;
+  position: fixed;
+  z-index: 0;
+}
+
+.site-content {
+  position: relative;
+  z-index: 1;
+}
+
+.scroll-wave-layer {
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  position: fixed;
+  z-index: 0;
+}
+
+.scroll-wave {
+  left: -10vw;
+  position: absolute;
+  width: 120vw;
+  will-change: transform;
+}
+
+.scroll-wave-a {
+  animation: waveDriftA 20s ease-in-out infinite;
+  fill: hsl(var(--primary) / 0.055);
+  top: 18vh;
+}
+
+.scroll-wave-b {
+  animation: waveDriftB 24s ease-in-out infinite;
+  fill: hsl(var(--accent) / 0.075);
+  top: 46vh;
+}
+
+.scroll-wave-c {
+  animation: waveDriftC 28s ease-in-out infinite;
+  bottom: -8vh;
+  fill: hsl(var(--muted) / 0.06);
+}
+
+@keyframes waveDriftA {
+  0% {
+    transform: translateX(calc(var(--wave-shift) * -0.18)) translateY(0);
+  }
+  50% {
+    transform: translateX(calc(var(--wave-shift) * -0.24)) translateY(10px);
+  }
+  100% {
+    transform: translateX(calc(var(--wave-shift) * -0.18)) translateY(0);
+  }
+}
+
+@keyframes waveDriftB {
+  0% {
+    transform: translateX(calc(var(--wave-shift) * 0.13)) translateY(0);
+  }
+  50% {
+    transform: translateX(calc(var(--wave-shift) * 0.19)) translateY(-12px);
+  }
+  100% {
+    transform: translateX(calc(var(--wave-shift) * 0.13)) translateY(0);
+  }
+}
+
+@keyframes waveDriftC {
+  0% {
+    transform: translateX(calc(var(--wave-shift) * -0.1)) translateY(0);
+  }
+  50% {
+    transform: translateX(calc(var(--wave-shift) * -0.16)) translateY(14px);
+  }
+  100% {
+    transform: translateX(calc(var(--wave-shift) * -0.1)) translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }

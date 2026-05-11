@@ -5,6 +5,7 @@ import Footer from "@/lib/components/footer"
 import AnnouncementBar from "@/lib/components/announcement-bar"
 import RewardsButton from "@/lib/components/rewards-button"
 import CartDrawer from "@/lib/components/cart-drawer"
+import ScrollWaveOverlay from "@/lib/components/scroll-wave-overlay"
 import { CartProvider } from "@/lib/cart-context"
 
 export const metadata: Metadata = {
@@ -12,6 +13,9 @@ export const metadata: Metadata = {
   description:
     "Pan de Arwah is a sourdough micro bakery in East New York, Brooklyn. Small-batch artisan loaves, gluten-free favorites, and sweets shipped across New York State.",
   metadataBase: new URL("https://pandearwah.com"),
+  icons: {
+    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+  },
 }
 
 /*
@@ -43,12 +47,15 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="min-h-screen flex flex-col bg-bg text-foreground">
+      <body className="site-shell min-h-screen bg-bg text-foreground">
         <CartProvider>
-          <AnnouncementBar />
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
+          <ScrollWaveOverlay />
+          <div className="site-content min-h-screen flex flex-col">
+            <AnnouncementBar />
+            <Navbar />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </div>
           <RewardsButton />
           <CartDrawer />
         </CartProvider>
