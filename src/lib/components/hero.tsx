@@ -4,9 +4,9 @@ import { heroImage } from "@/lib/products"
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden">
+    <section className="hero-section relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 pt-16 pb-20 md:pt-24 md:pb-28 grid md:grid-cols-2 gap-12 items-center">
-        <div className="relative z-10">
+        <div className="hero-copy relative z-10">
           <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-muted mb-6">
             <span className="w-8 h-px bg-muted" />
             Brooklyn micro bakery
@@ -56,7 +56,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="relative">
+        <div className="hero-media relative">
           <div className="relative aspect-[4/5] md:aspect-[5/6] rounded-xl overflow-hidden bg-surface border border-border shadow-sm">
             <Image
               src={heroImage}
@@ -80,7 +80,7 @@ export default function Hero() {
 
       <div
         aria-hidden
-        className="absolute inset-x-0 -top-32 h-64 bg-gradient-to-b from-accent/15 to-transparent pointer-events-none"
+        className="hero-glow absolute inset-x-0 -top-32 h-64 bg-gradient-to-b from-accent/15 to-transparent pointer-events-none"
       />
     </section>
   )

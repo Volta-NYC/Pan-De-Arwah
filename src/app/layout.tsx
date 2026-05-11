@@ -6,6 +6,7 @@ import AnnouncementBar from "@/lib/components/announcement-bar"
 import RewardsButton from "@/lib/components/rewards-button"
 import CartDrawer from "@/lib/components/cart-drawer"
 import ScrollWaveOverlay from "@/lib/components/scroll-wave-overlay"
+import SubtleMotion from "@/lib/components/subtle-motion"
 import { CartProvider } from "@/lib/cart-context"
 
 export const metadata: Metadata = {
@@ -50,6 +51,7 @@ export default function RootLayout({
       <body className="site-shell min-h-screen bg-bg text-foreground">
         <CartProvider>
           <ScrollWaveOverlay />
+          <SubtleMotion />
           <div className="site-content min-h-screen flex flex-col">
             <AnnouncementBar />
             <Navbar />
