@@ -5,9 +5,12 @@ export default function Footer() {
     <footer className="mt-24 border-t border-border bg-surface">
       <div className="max-w-7xl mx-auto px-6 py-14 grid gap-10 md:grid-cols-4">
         <div className="md:col-span-2">
-          <div className="font-display text-2xl mb-2">Pan de Arwah</div>
+          <div className="font-display text-2xl mb-2">Pan De Arwah</div>
+          <div className="mb-3 text-sm font-medium text-primary">
+            The proof is in the crumb.
+          </div>
           <p className="text-sm text-muted max-w-sm">
-            Artisan sourdough micro bakery in East New York, Brooklyn. Small batch,
+            Artisanal sourdough microbakery in East New York, Brooklyn. Small batch,
             slow ferment, shipped across New York State on Fridays.
           </p>
           <form className="mt-6 flex max-w-sm gap-2">
@@ -71,7 +74,7 @@ export default function Footer() {
 
       <div className="border-t border-border">
         <div className="max-w-7xl mx-auto px-6 py-5 flex flex-col sm:flex-row gap-2 sm:justify-between text-xs text-muted">
-          <div>© {new Date().getFullYear()} Pan de Arwah. All rights reserved.</div>
+          <div>© {new Date().getFullYear()} Pan De Arwah. All rights reserved.</div>
           <Link
             href="https://nyc.voltanpo.org"
             target="_blank"

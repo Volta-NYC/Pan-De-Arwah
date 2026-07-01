@@ -19,9 +19,9 @@ export default function Navbar() {
     <nav className="sticky top-0 z-40 backdrop-blur bg-bg/80 border-b border-border">
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         <Link href="/" className="flex items-baseline gap-2">
-          <span className="font-display text-2xl tracking-tight">Pan de Arwah</span>
+          <span className="font-display text-2xl tracking-tight">Pan De Arwah</span>
           <span className="hidden sm:inline text-xs text-muted">
-            artisan sourdough · Brooklyn
+            The proof is in the crumb
           </span>
         </Link>
 

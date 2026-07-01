@@ -12,7 +12,7 @@ export default function About() {
         </div>
         <div className="md:col-span-3 space-y-5 text-foreground/85 text-lg leading-relaxed">
           <p>
-            Pan de Arwah began in a Brooklyn home kitchen with one starter and a
+            Pan De Arwah began in a Brooklyn home kitchen with one starter and a
             stubborn belief that sourdough should be unhurried, generous, and
             shared.
           </p>
@@ -23,8 +23,8 @@ export default function About() {
             the table has to opt out.
           </p>
           <p className="text-muted">
-            We bake in small batches, ship on Fridays, and host porch pickups in
-            Brooklyn on Saturday afternoons.
+            We bake in small batches, ship on Fridays, and follow the rhythm of
+            market weekends across New York City.
           </p>
         </div>
       </div>

@@ -1,8 +1,8 @@
 const steps = [
   {
     n: "01",
-    title: "Order by Wednesday",
-    body: "Place your order through our shop or pre-order on Hotplate by Wednesday night for the week's bake.",
+    title: "Order through Shopify",
+    body: "Pan De Arwah will keep Shopify as the main home for ordering and operations, with Hotplate linked for current pickup windows and market updates.",
   },
   {
     n: "02",
@@ -11,8 +11,13 @@ const steps = [
   },
   {
     n: "03",
-    title: "Friday ship · Saturday pickup",
-    body: "We ship across New York State on Fridays. Brooklyn neighbors can grab orders from our porch Saturdays, 3–8 PM.",
+    title: "Friday ship · pickup windows",
+    body: "We ship across New York State on Fridays. Brooklyn porch pickups open when available and may pause during weekend markets.",
+  },
+  {
+    n: "04",
+    title: "Check the market schedule",
+    body: "Weekend vending rotates across New York City. If porch pickup is unavailable, Hotplate may temporarily close while the latest pickup availability and market location are updated.",
   },
 ]
 
@@ -29,7 +34,7 @@ export default function HowItWorks() {
           </h2>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-5">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
           {steps.map((s) => (
             <div
               key={s.n}
@@ -43,7 +48,7 @@ export default function HowItWorks() {
         </div>
 
         <div className="mt-10 rounded-xl border border-border bg-elevated px-6 py-5 text-sm text-muted flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-          <div>Free shipping on orders over $50.</div>
+          <div>Free shipping on orders over $50. Latest pickup and market details live on Hotplate.</div>
           <a
             href="https://www.hotplate.com/pandearwah"
             target="_blank"

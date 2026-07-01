@@ -1,9 +1,9 @@
 import WholesaleCTA from "@/lib/components/wholesale-cta"
 
 export const metadata = {
-  title: "Contact — Pan de Arwah",
+  title: "Contact — Pan De Arwah",
   description:
-    "Get in touch with Pan de Arwah for orders, wholesale, catering, or general questions.",
+    "Get in touch with Pan De Arwah for orders, wholesale, catering, or general questions.",
 }
 
 export default function ContactPage() {
@@ -57,6 +57,10 @@ export default function ContactPage() {
               >
                 hotplate.com/pandearwah ↗
               </a>
+              <div className="text-sm text-muted mt-2">
+                Check Hotplate for the latest porch pickup availability and NYC
+                market location updates.
+              </div>
             </div>
           </div>
         </div>

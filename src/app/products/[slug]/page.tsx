@@ -20,9 +20,9 @@ export async function generateMetadata({
 }) {
   const { slug } = await params
   const product = getProductBySlug(slug)
-  if (!product) return { title: "Not found — Pan de Arwah" }
+  if (!product) return { title: "Not found — Pan De Arwah" }
   return {
-    title: `${product.name} — Pan de Arwah`,
+    title: `${product.name} — Pan De Arwah`,
     description: product.blurb,
   }
 }

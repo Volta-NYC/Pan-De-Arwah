@@ -15,6 +15,14 @@ export default function WholesaleCTA() {
               custom catering menus around what you need. Tell us a little about
               your space and we&rsquo;ll be in touch.
             </p>
+            <div className="mt-6 grid gap-3 sm:grid-cols-2">
+              <span className="rounded-xl border border-dashed border-border bg-elevated px-4 py-3 text-sm text-muted">
+                Wholesale menu PDF coming soon
+              </span>
+              <span className="rounded-xl border border-dashed border-border bg-elevated px-4 py-3 text-sm text-muted">
+                Catering menu PDF coming soon
+              </span>
+            </div>
             <p className="mt-4 text-sm text-muted">
               Or email us directly:{" "}
               <a

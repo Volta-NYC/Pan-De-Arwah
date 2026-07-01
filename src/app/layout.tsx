@@ -10,9 +10,9 @@ import SubtleMotion from "@/lib/components/subtle-motion"
 import { CartProvider } from "@/lib/cart-context"
 
 export const metadata: Metadata = {
-  title: "Pan de Arwah — Artisan Sourdough Micro Bakery · Brooklyn",
+  title: "Pan De Arwah — Artisanal Sourdough Microbakery · Brooklyn",
   description:
-    "Pan de Arwah is a sourdough micro bakery in East New York, Brooklyn. Small-batch artisan loaves, gluten-free favorites, and sweets shipped across New York State.",
+    "Pan De Arwah is an artisanal sourdough microbakery in East New York, Brooklyn. Small batch artisan loaves, gluten-free favorites, and sweets shipped across New York State.",
   metadataBase: new URL("https://pandearwah.com"),
   icons: {
     icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],

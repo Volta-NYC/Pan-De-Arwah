@@ -2,9 +2,9 @@ import About from "@/lib/components/about"
 import HowItWorks from "@/lib/components/how-it-works"
 
 export const metadata = {
-  title: "About — Pan de Arwah",
+  title: "About — Pan De Arwah",
   description:
-    "Pan de Arwah is a sourdough micro bakery in East New York, Brooklyn — small batch, slow ferment, generous bread.",
+    "Pan De Arwah is a sourdough microbakery in East New York, Brooklyn — small batch, slow ferment, generous bread.",
 }
 
 export default function AboutPage() {
@@ -19,7 +19,7 @@ export default function AboutPage() {
             Bread, made with patience.
           </h1>
           <p className="mt-6 text-lg text-muted max-w-2xl">
-            Pan de Arwah is a sourdough micro bakery in East New York, Brooklyn.
+            Pan De Arwah is a sourdough microbakery in East New York, Brooklyn.
             We bake in small batches, ferment slowly, and ship across New York
             State on Fridays.
           </p>

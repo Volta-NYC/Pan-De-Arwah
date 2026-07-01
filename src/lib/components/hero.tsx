@@ -9,18 +9,21 @@ export default function Hero() {
         <div className="hero-copy relative z-10">
           <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-muted mb-6">
             <span className="w-8 h-px bg-muted" />
-            Brooklyn micro bakery
+            Brooklyn microbakery
+          </div>
+          <div className="mb-5 inline-flex rounded-full border border-primary/25 bg-elevated px-4 py-2 text-sm font-medium text-primary">
+            The proof is in the crumb.
           </div>
           <h1 className="font-display text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight">
             Slow bread,
             <br />
-            <span className="italic text-primary">small hands,</span>
+            <span className="italic text-primary">small batch,</span>
             <br />
             shipped on Fridays.
           </h1>
           <p className="mt-6 text-lg text-muted max-w-md">
-            Pan de Arwah is an artisan sourdough micro bakery in East New York —
-            naturally leavened loaves, gluten-free favorites, and small-batch
+            Pan De Arwah is an artisanal sourdough microbakery in East New York.
+            Naturally leavened loaves, gluten-free favorites, and small batch
             sweets baked with intention.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
@@ -69,10 +72,10 @@ export default function Hero() {
           </div>
           <div className="absolute -bottom-6 -left-6 hidden md:block bg-elevated rounded-xl border border-border px-5 py-4 shadow-sm max-w-[16rem]">
             <div className="text-xs uppercase tracking-widest text-muted mb-1">
-              This week
+              Arwah says
             </div>
             <div className="font-display text-lg leading-tight">
-              Cinnamon Rolls &amp; Cosmic Brownies are back.
+              Follow the crumb trail for market day updates.
             </div>
           </div>
         </div>
