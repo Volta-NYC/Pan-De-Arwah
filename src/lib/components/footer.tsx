@@ -76,12 +76,12 @@ export default function Footer() {
         <div className="max-w-7xl mx-auto px-6 py-5 flex flex-col sm:flex-row gap-2 sm:justify-between text-xs text-muted">
           <div>© {new Date().getFullYear()} Pan De Arwah. All rights reserved.</div>
           <Link
-            href="https://nyc.voltanpo.org"
+            href="https://www.novusnyc.org/"
             target="_blank"
             rel="noreferrer"
-            className="hover:text-foreground"
+            className="text-[#F6B78D] hover:text-[#F6B78D]"
           >
-            Website by @VoltaNYC
+            Made by Novus
           </Link>
         </div>
       </div>
